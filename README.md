@@ -5,7 +5,7 @@ Docker Compose with service discovery for a Django project
 
 1. db -> MySQL DB server
 2. consul -> Service discovery
-3. registrator -> Service registry bridget for Docker
+3. registrator -> Service registry bridge for Docker
 4. nginx -> Load balancer
 5. web -> basic django project with django-restframework and mysql client
 

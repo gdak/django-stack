@@ -1,0 +1,51 @@
+db:
+  restart: always
+  image: mysql:5.7
+  ports:
+    - "3306"
+  container_name: db
+  environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+
+consul:
+  restart: always
+  image: consul
+  container_name: consul
+  hostname: consul
+  ports:
+    - "8500:8500"
+  command: agent -server -advertise=${HOSTIP} -ui -bootstrap -client=0.0.0.0
+
+registrator:
+  restart: always
+  image: gliderlabs/registrator:latest
+  container_name: registrator
+  net: host
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+  command: consul://${HOSTIP}:8500
+
+nginx:
+  restart: always
+  build: ./nginx/
+  container_name: nginx
+  hostname: nginx
+  ports:
+    - "80:80"
+  volumes:
+    - ./nginx/service.ctmpl:/templates/service.ctmpl
+  links:
+    - consul
+
+web:
+  restart: always
+  build: ./web 
+  ports:
+    - "80" 
+  links:
+    - db
+  environment:
+    - SECRET_KEY=${SECRET_KEY}
+    - IN_DEV=${IN_DEV}
+    - DEBUG=${DEBUG}

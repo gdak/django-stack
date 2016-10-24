@@ -9,14 +9,14 @@ Docker Compose with service discovery for a Django project
 4. nginx -> Load balancer
 5. web -> basic django project with django-restframework and mysql client
 
-.env file needed with this variables:
+**.env file needed with this variables:**
 
-HOSTIP=X.X.X.X
-MYSQL_ROOT_PASSWORD=DB_PASSWORD
-MYSQL_DATABASE=DB_NAME
-SECRET_KEY=DJANGO_SECRET_KEY
-DEBUG=[0-1]
-IN_DEV=[0-1]
+- HOSTIP=X.X.X.X
+- MYSQL_ROOT_PASSWORD=DB_PASSWORD
+- MYSQL_DATABASE=DB_NAME
+- SECRET_KEY=DJANGO_SECRET_KEY
+- DEBUG=[0-1]
+- IN_DEV=[0-1]
 
 # Basic guide
 

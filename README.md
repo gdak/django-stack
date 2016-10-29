@@ -1,5 +1,5 @@
 # django-stack
-Docker Compose with service discovery for a Django project
+Docker Compose with service discovery for Django
 
 **5 components**
 
